@@ -1,4 +1,4 @@
-import { createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ChatMessage } from "core";
 import { modelSupportsTools } from "core/llm/autodetect";
 import { ToCoreProtocol } from "core/protocol";
@@ -113,8 +113,7 @@ export const streamNormalInput = createAsyncThunk<
         toolSettings[toolCallState.toolCall.function.name] ===
         "allowedWithoutPermission"
       ) {
-        const response = await dispatch(callTool());
-        unwrapResult(response);
+        await dispatch(callTool());
       }
     }
   },

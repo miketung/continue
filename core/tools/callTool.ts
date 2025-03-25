@@ -83,7 +83,15 @@ async function callToolFromUri(
       });
 
       if (response.isError === true) {
-        throw new Error(`Failed to call tool: ${toolName}`);
+        return [
+          {
+            icon: "problems",
+            name: "Tool Call Error",
+            description: "Tool Call Failed",
+            content: `The tool call failed with the message:\n\n${response.content}\n\nPlease try something else or request further instructions.`,
+            hidden: false,
+          },
+        ];
       }
 
       const contextItems: ContextItem[] = [];

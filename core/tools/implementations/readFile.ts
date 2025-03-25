@@ -11,6 +11,7 @@ export const readFileImpl: ToolImpl = async (args, extras) => {
   if (!firstUriMatch) {
     throw new Error(`Could not find file ${args.filepath}`);
   }
+  throw new Error("expected");
   const content = await extras.ide.readFile(firstUriMatch);
   return [
     {
