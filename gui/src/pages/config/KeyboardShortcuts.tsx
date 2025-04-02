@@ -73,15 +73,15 @@ const vscodeShortcuts: KeyboardShortcutProps[] = [
     description: "Toggle Selected Model",
   },
   {
-    mac: "⌘ I",
-    windows: "⌃ I",
-    description: "Edit highlighted code",
-  },
-  {
     mac: "⌘ L",
     windows: "⌃ L",
     description:
       "New Chat / New Chat With Selected Code / Close Continue Sidebar If Chat Already In Focus",
+  },
+  {
+    mac: "⌘ I",
+    windows: "⌃ I",
+    description: "Edit highlighted code",
   },
   {
     mac: "⌘ ⌫",
@@ -89,9 +89,14 @@ const vscodeShortcuts: KeyboardShortcutProps[] = [
     description: "Cancel response",
   },
   {
-    mac: "⌘ ⇧ I",
-    windows: "⌃ ⇧ I",
-    description: "Toggle inline edit focus",
+    mac: "⌘ .",
+    windows: "⌃ .",
+    description: "Toggle Mode (Chat, Agent, Edit)",
+  },
+  {
+    mac: "⌘ ⇧ '",
+    windows: "⌃ ⇧ '",
+    description: "Toggle Selected Assistant",
   },
   {
     mac: "⌘ ⇧ L",
@@ -99,6 +104,12 @@ const vscodeShortcuts: KeyboardShortcutProps[] = [
     description:
       "Focus Current Chat / Add Selected Code To Current Chat / Close Continue Sidebar If Chat Already In Focus",
   },
+  {
+    mac: "⌘ ⇧ I",
+    windows: "⌃ ⇧ I",
+    description: "Toggle inline edit focus",
+  },
+
   {
     mac: "⌘ ⇧ R",
     windows: "⌃ ⇧ R",
@@ -152,6 +163,16 @@ const jetbrainsShortcuts: KeyboardShortcutProps[] = [
     windows: "⌃ J",
     description:
       "New Chat / New Chat With Selected Code / Close Continue Sidebar If Chat Already In Focus",
+  },
+  {
+    mac: "⌘ .",
+    windows: "⌃ .",
+    description: "Toggle Mode (Chat, Agent, Edit)",
+  },
+  {
+    mac: "⌘ ⇧ '",
+    windows: "⌃ ⇧ '",
+    description: "Toggle Selected Assistant",
   },
   {
     mac: "⌘ ⌫",
