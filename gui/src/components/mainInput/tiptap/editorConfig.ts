@@ -24,8 +24,6 @@ import {
   selectIsInEditMode,
 } from "../../../redux/slices/sessionSlice";
 import { AppDispatch } from "../../../redux/store";
-import { exitEditMode } from "../../../redux/thunks";
-import { loadLastSession } from "../../../redux/thunks/session";
 import { getFontSize } from "../../../util";
 import { AddCodeToEdit } from "./extensions/AddCodeToEditExtension";
 import { CodeBlockExtension } from "./extensions/CodeBlockExtension";
@@ -257,14 +255,15 @@ export function createEditorConfig(options: {
                 ideMessenger.post("focusEditor", undefined);
                 return true;
               }
-              (async () => {
-                await dispatch(
-                  loadLastSession({
-                    saveCurrentSession: false,
-                  }),
-                );
-                dispatch(exitEditMode());
-              })();
+
+              // (async () => {
+              //   await dispatch(
+              //     loadLastSession({
+              //       saveCurrentSession: false,
+              //     }),
+              //   );
+              //   dispatch(exitEditMode());
+              // })();
 
               return true;
             },

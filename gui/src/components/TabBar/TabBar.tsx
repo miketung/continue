@@ -177,11 +177,9 @@ export function TabBar() {
     // Save current session before creating new one
     if (hasHistory) {
       await dispatch(
-        saveCurrentSession({ openNewSession: false, generateTitle: true }),
+        saveCurrentSession({ openNewSession: true, generateTitle: true }),
       );
     }
-
-    dispatch(newSession());
 
     dispatch(
       addTab({

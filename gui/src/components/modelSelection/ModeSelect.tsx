@@ -18,11 +18,7 @@ import {
   selectCurrentMode,
   setMode,
 } from "../../redux/slices/sessionSlice";
-import { exitEditMode } from "../../redux/thunks";
-import {
-  loadLastSession,
-  saveCurrentSession,
-} from "../../redux/thunks/session";
+import { changeModeTo } from "../../redux/thunks/mode";
 import { getFontSize, getMetaKeyLabel, isJetBrains } from "../../util";
 import {
   Listbox,
@@ -87,25 +83,7 @@ function ModeSelect() {
     <Listbox
       value={mode}
       onChange={async (newMode) => {
-        if (newMode === mode) {
-          return;
-        }
-        dispatch(setMode(newMode));
-        if (newMode === "edit") {
-          await dispatch(
-            saveCurrentSession({
-              generateTitle: false,
-              openNewSession: true,
-            }),
-          );
-        } else if (mode === "edit") {
-          await dispatch(
-            loadLastSession({
-              saveCurrentSession: false,
-            }),
-          );
-          dispatch(exitEditMode());
-        }
+        dispatch(changeModeTo(newMode));
       }}
     >
       <div className="relative">

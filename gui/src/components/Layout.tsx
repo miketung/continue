@@ -11,13 +11,12 @@ import { focusEdit, setEditStatus } from "../redux/slices/editModeState";
 import {
   addCodeToEdit,
   newSession,
-  selectIsInEditMode,
   setMode,
   updateApplyState,
 } from "../redux/slices/sessionSlice";
 import { setShowDialog } from "../redux/slices/uiSlice";
 import { exitEditMode } from "../redux/thunks";
-import { loadLastSession, saveCurrentSession } from "../redux/thunks/session";
+import { saveCurrentSession } from "../redux/thunks/session";
 import { fontSize, isMetaEquivalentKeyPressed } from "../util";
 import { incrementFreeTrialCount } from "../util/freeTrial";
 import { ROUTES } from "../util/navigation";
@@ -62,13 +61,18 @@ const Layout = () => {
     "newSession",
     async () => {
       navigate(ROUTES.HOME);
+      // will only apply if in edit mode
+      dispatch(
+        exitEditMode({
+          success: false,
+        }),
+      );
       await dispatch(
         saveCurrentSession({
           openNewSession: true,
           generateTitle: true,
         }),
       );
-      dispatch(exitEditMode());
     },
     [],
   );
@@ -87,12 +91,16 @@ const Layout = () => {
     async () => {
       navigate(ROUTES.HOME);
       await dispatch(
+        exitEditMode({
+          success: false,
+        }),
+      );
+      await dispatch(
         saveCurrentSession({
           openNewSession: true,
           generateTitle: true,
         }),
       );
-      dispatch(exitEditMode());
     },
     [location.pathname],
     location.pathname === ROUTES.HOME,
@@ -204,21 +212,16 @@ const Layout = () => {
     [],
   );
 
-  const isInEditMode = useAppSelector(selectIsInEditMode);
   useWebviewListener(
     "exitEditMode",
     async () => {
-      if (!isInEditMode) {
-        return;
-      }
       dispatch(
-        loadLastSession({
-          saveCurrentSession: false,
+        exitEditMode({
+          success: false,
         }),
       );
-      dispatch(exitEditMode());
     },
-    [isInEditMode],
+    [],
   );
 
   useEffect(() => {

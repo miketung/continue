@@ -49,6 +49,7 @@ type SessionState = {
   mainEditorContentTrigger?: JSONContent | undefined;
   symbols: FileSymbolMap;
   mode: MessageModes;
+  lastMode?: MessageModes;
   codeBlockApplyStates: {
     states: ApplyState[];
     curIndex: number;
@@ -640,6 +641,9 @@ export const sessionSlice = createSlice({
     setMode: (state, action: PayloadAction<MessageModes>) => {
       state.mode = action.payload;
     },
+    setLastMode: (state, action: PayloadAction<MessageModes>) => {
+      state.lastMode = action.payload;
+    },
     cycleMode: (state, action: PayloadAction<{ isJetBrains: boolean }>) => {
       const modes = action.payload.isJetBrains
         ? ["chat", "edit", "agent"]
@@ -754,6 +758,7 @@ export const {
   setToolGenerated,
   setToolCallOutput,
   setMode,
+  setLastMode,
   setAllSessionMetadata,
   addSessionMetadata,
   updateSessionMetadata,

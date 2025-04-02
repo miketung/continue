@@ -20,7 +20,6 @@ import {
   selectIsInEditMode,
 } from "../../redux/slices/sessionSlice";
 import { exitEditMode } from "../../redux/thunks";
-import { loadLastSession } from "../../redux/thunks/session";
 import {
   getAltKeyLabel,
   getFontSize,
@@ -216,12 +215,11 @@ function InputToolbar(props: InputToolbarProps) {
             <HoverItem
               className="hidden hover:underline sm:flex"
               onClick={async (e) => {
-                await dispatch(
-                  loadLastSession({
-                    saveCurrentSession: false,
+                dispatch(
+                  exitEditMode({
+                    success: false,
                   }),
                 );
-                dispatch(exitEditMode());
               }}
             >
               <span>

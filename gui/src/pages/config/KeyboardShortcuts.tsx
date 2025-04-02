@@ -96,7 +96,7 @@ const vscodeShortcuts: KeyboardShortcutProps[] = [
   {
     mac: "⌘ ⇧ '",
     windows: "⌃ ⇧ '",
-    description: "Toggle Selected Assistant",
+    description: "Toggle Current Assistant",
   },
   {
     mac: "⌘ ⇧ L",
@@ -172,7 +172,7 @@ const jetbrainsShortcuts: KeyboardShortcutProps[] = [
   {
     mac: "⌘ ⇧ '",
     windows: "⌃ ⇧ '",
-    description: "Toggle Selected Assistant",
+    description: "Toggle Current Assistant",
   },
   {
     mac: "⌘ ⌫",

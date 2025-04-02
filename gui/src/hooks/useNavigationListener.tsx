@@ -1,6 +1,7 @@
 import type { ToWebviewProtocol } from "core/protocol";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { ROUTES } from "../util/navigation";
 import { useWebviewListener } from "./useWebviewListener";
 
 const openGUITypes: (keyof ToWebviewProtocol)[] = [
@@ -17,7 +18,7 @@ export const useNavigationListener = () => {
     useWebviewListener(
       messageType,
       async (data) => {
-        navigate("/");
+        navigate(ROUTES.HOME);
         setTimeout(() => {
           window.postMessage(
             {

@@ -44,7 +44,7 @@ import {
   setShowDialog,
 } from "../../redux/slices/uiSlice";
 import { cancelStream } from "../../redux/thunks/cancelStream";
-import { exitEditMode } from "../../redux/thunks/exitEditMode";
+import { exitEditMode } from "../../redux/thunks/mode";
 import { loadLastSession } from "../../redux/thunks/session";
 import { streamResponseThunk } from "../../redux/thunks/streamResponse";
 import { isMetaEquivalentKeyPressed } from "../../util";
@@ -443,12 +443,11 @@ export function Chat() {
               pendingApplyStates={pendingApplyStates}
               onAcceptOrReject={async (outcome) => {
                 if (outcome === "acceptDiff") {
-                  await dispatch(
-                    loadLastSession({
-                      saveCurrentSession: false,
+                  dispatch(
+                    exitEditMode({
+                      success: true,
                     }),
                   );
-                  dispatch(exitEditMode());
                 }
               }}
             />

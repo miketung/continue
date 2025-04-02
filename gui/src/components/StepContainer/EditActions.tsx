@@ -3,10 +3,9 @@ import AcceptRejectAllButtons from "./AcceptRejectAllButtons";
 import FeedbackButtons from "./FeedbackButtons";
 
 import { renderChatMessage } from "core/util/messageContent";
-import { CopyIconButton } from "../gui/CopyIconButton";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { exitEditMode } from "../../redux/thunks/exitEditMode";
-import { loadLastSession } from "../../redux/thunks/session";
+import { exitEditMode } from "../../redux/thunks/mode";
+import { CopyIconButton } from "../gui/CopyIconButton";
 
 export interface EditActionsProps {
   index: number;
@@ -59,12 +58,11 @@ export default function EditActions({ index, item }: EditActionsProps) {
             pendingApplyStates={pendingApplyStates}
             onAcceptOrReject={async (outcome) => {
               if (outcome === "acceptDiff") {
-                await dispatch(
-                  loadLastSession({
-                    saveCurrentSession: false,
+                dispatch(
+                  exitEditMode({
+                    success: true,
                   }),
                 );
-                dispatch(exitEditMode());
               }
             }}
           />
