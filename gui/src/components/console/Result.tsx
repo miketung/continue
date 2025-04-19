@@ -11,7 +11,6 @@ const Result = memo(function Result({ result, prevResult }: ResultProps) {
   switch (result.kind) {
     case "chunk":
       return <span>{result.chunk}</span>;
-      break;
     case "message":
       switch (result.message.role) {
         case "assistant":

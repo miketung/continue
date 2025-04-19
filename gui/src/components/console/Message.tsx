@@ -1,9 +1,4 @@
-import {
-  AssistantChatMessage,
-  ChatMessage,
-  ThinkingChatMessage,
-  UserChatMessage,
-} from "core";
+import { AssistantChatMessage, ChatMessage, UserChatMessage } from "core";
 import { memo } from "react";
 
 export interface MessageProps {
@@ -24,9 +19,7 @@ export function renderMessageRole(role: ChatMessage["role"]) {
   );
 }
 
-function renderMessageContent(
-  message: AssistantChatMessage | UserChatMessage | ThinkingChatMessage,
-) {
+function renderMessageContent(message: AssistantChatMessage | UserChatMessage) {
   if (typeof message.content == "string") {
     return renderMessageText(message.content);
   } else {
@@ -52,26 +45,12 @@ export function renderMessage(message: ChatMessage, includeRole: boolean) {
               ))
             : ""}
           {renderMessageContent(message)}
-        </>
-      );
-      break;
-    case "thinking":
-      return (
-        <>
-          {includeRole ? renderMessageRole(message.role) : ""}
-          {message.toolCalls
-            ? message.toolCalls.map((toolCall) => (
-                <pre>Tool call: {JSON.stringify(toolCall, undefined, 2)}</pre>
-              ))
-            : ""}
-          {renderMessageContent(message)}
           {message.redactedThinking && (
             <pre>Redacted Thinking: {message.redactedThinking}</pre>
           )}
           {message.signature && <pre>Signature: {message.signature}</pre>}
         </>
       );
-      break;
     case "user":
       return (
         <>
@@ -79,7 +58,6 @@ export function renderMessage(message: ChatMessage, includeRole: boolean) {
           {renderMessageContent(message)}
         </>
       );
-      break;
     case "system":
       return (
         <>
@@ -95,7 +73,6 @@ export function renderMessage(message: ChatMessage, includeRole: boolean) {
           {renderMessageText(message.content)}
         </>
       );
-      break;
   }
 }
 

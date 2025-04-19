@@ -9,7 +9,6 @@ import {
   LLMInteractionStartComplete,
   LLMInteractionStartFim,
   LLMInteractionSuccess,
-  ThinkingChatMessage,
   ToolCallDelta,
   UserChatMessage,
 } from "..";
@@ -268,7 +267,7 @@ export class LLMLogFormatter {
 
   private logMessageContent(
     item: LLMInteractionItem,
-    message: AssistantChatMessage | UserChatMessage | ThinkingChatMessage,
+    message: AssistantChatMessage | UserChatMessage,
   ) {
     if (typeof message.content === "string") {
       this.logMessageText(item, message.content);
@@ -289,10 +288,7 @@ export class LLMLogFormatter {
     forceRole: boolean = false,
   ) {
     let showRole = true;
-    if (
-      !forceRole &&
-      (message.role === "assistant" || message.role === "thinking")
-    ) {
+    if (!forceRole && message.role === "assistant") {
       const interaction = this.getInteractionData(item);
       const lastMessage =
         interaction.lastItem?.kind === "message"
@@ -309,12 +305,6 @@ export class LLMLogFormatter {
 
     switch (message.role) {
       case "assistant":
-        if (message.toolCalls) {
-          this.logToolcalls(item, message.toolCalls);
-        }
-        this.logMessageContent(item, message);
-        break;
-      case "thinking":
         if (message.toolCalls) {
           this.logToolcalls(item, message.toolCalls);
         }

@@ -298,12 +298,7 @@ export interface CompletionOptions extends BaseCompletionOptions {
   model: string;
 }
 
-export type ChatMessageRole =
-  | "user"
-  | "assistant"
-  | "thinking"
-  | "system"
-  | "tool";
+export type ChatMessageRole = "user" | "assistant" | "system" | "tool";
 
 export type TextMessagePart = {
   type: "text";
@@ -348,18 +343,12 @@ export interface UserChatMessage {
   content: MessageContent;
 }
 
-export interface ThinkingChatMessage {
-  role: "thinking";
-  content: MessageContent;
-  signature?: string;
-  redactedThinking?: string;
-  toolCalls?: ToolCallDelta[];
-}
-
 export interface AssistantChatMessage {
   role: "assistant";
   content: MessageContent;
   toolCalls?: ToolCallDelta[];
+  signature?: string;
+  redactedThinking?: string;
 }
 
 export interface SystemChatMessage {
@@ -370,7 +359,6 @@ export interface SystemChatMessage {
 export type ChatMessage =
   | UserChatMessage
   | AssistantChatMessage
-  | ThinkingChatMessage
   | SystemChatMessage
   | ToolResultChatMessage;
 
@@ -966,7 +954,10 @@ export interface ToolExtras {
   fetch: FetchFunction;
   tool: Tool;
   toolCallId?: string;
-  onPartialOutput?: (params: { toolCallId: string, contextItems: ContextItem[] }) => void;
+  onPartialOutput?: (params: {
+    toolCallId: string;
+    contextItems: ContextItem[];
+  }) => void;
 }
 
 export interface Tool {
