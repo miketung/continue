@@ -2,6 +2,7 @@ import { ctxItemToRifWithContents } from "core/commands/util";
 import { memo, useEffect, useMemo, useRef } from "react";
 import { useRemark } from "react-remark";
 import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import styled from "styled-components";
 import { visit } from "unist-util-visit";
@@ -209,6 +210,7 @@ const StyledMarkdownPreview = memo(function StyledMarkdownPreview(
   const [reactContent, setMarkdownSource] = useRemark({
     remarkPlugins: [
       remarkTables,
+      remarkGfm, // Enables GitHub-flavored markdown
       [
         remarkMath,
         {
